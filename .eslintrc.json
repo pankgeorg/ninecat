@@ -1,0 +1,14 @@
+{
+  "extends": ["airbnb", "react-app", "prettier", "prettier/react"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "react/prop-types": "off",
+    "react/jsx-filename-extension": "off",
+    "import/prefer-default-export": "off",
+    "no-nested-ternary": "off",
+    "no-underscore-dangle": [2, { "allow": [
+      "__REDUX_DEVTOOLS_EXTENSION__"
+    ] } ]
+  }
+}
