@@ -1,0 +1,11 @@
+dataclasses==0.7
+distro==1.5.0
+fastapi==0.54.1
+numpy==1.18.4
+pandas==1.0.3
+pydantic==1.5.1
+python-dateutil==2.8.1
+pytz==2020.1
+six==1.14.0
+starlette==0.13.2
+tabula-py==2.1.0
