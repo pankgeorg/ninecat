@@ -2,14 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import PG from "./pgeorgakopoulos";
 import * as serviceWorker from "./serviceWorker";
+import "@blueprintjs/core/lib/css/blueprint.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import "tachyons";
 
 ReactDOM.render(
   <React.StrictMode>
-    {window.location.href.indexOf("pankgeorg.com") !== -1 && <PG />}
-    {window.location.href.indexOf("silentech.gr") !== -1 && <PG />}
     <App />
   </React.StrictMode>,
   document.getElementById("root")
