@@ -9,30 +9,10 @@ import pandas
 from tabula import read_pdf
 
 from fastapi import FastAPI, File, UploadFile
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 app.mount("/tmp/", StaticFiles(directory="/tmp"), name="tmp")
-origins = [
-    "http://127.0.0.1",
-    "http://pankgeorg.com",
-    "https://pankgeorg.com",
-    "http://www.pankgeorg.com",
-    "https://www.pankgeorg.com",
-    "http://localhost",
-    "http://localhost:3000",
-    "http://localhost:5000",
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 
 @app.get("/")
 def read_root():

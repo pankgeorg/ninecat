@@ -7,6 +7,7 @@ services:
     volumes:
       - ./config/nginx:/etc/nginx/conf.d
       - ./config/certbot/conf:/etc/letsencrypt
+      - ./build:/var/www
       - ./config/certbot/www:/var/www/certbot
     ports:
       - "80:80"
