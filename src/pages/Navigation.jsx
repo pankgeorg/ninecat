@@ -15,7 +15,7 @@ export default () => (
           <Menu>
             <MenuItemLink
               icon="th-derived"
-              text="ΕΛΠΕ pdf to table"
+              text="xref pdf to table"
               to={tools}
             />
           </Menu>
