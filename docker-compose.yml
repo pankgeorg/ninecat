@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   nginx:
@@ -12,6 +12,8 @@ services:
       - "80:80"
       - "443:443"
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    depends_on:
+      - ninecat
   certbot:
     image: certbot/certbot
     restart: unless-stopped
@@ -22,5 +24,3 @@ services:
   ninecat:
     image: ninecat-py
     restart: unless-stopped
-    volumes:
-      - ./config/tmp:/tmp
