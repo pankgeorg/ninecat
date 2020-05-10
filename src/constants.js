@@ -2,7 +2,7 @@ export const tools = "/tools";
 export const root = "/";
 export const inputId = "fileInputDad";
 export const dadFileUploadURL = "/daduploadfile/";
-export const backendURL = "http://127.0.0.1:8080";
+export const backendURL = "https://api.silentech.gr";
 export const FETCH_STATES = {
   NOT_STARTED: 1,
   STARTED: 2,
