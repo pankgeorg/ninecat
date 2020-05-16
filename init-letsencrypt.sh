@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(silentech.gr api.silentech.gr)
+domains=(silentech.gr api.silentech.gr postgres.silentech.gr)
 rsa_key_size=4096
 data_path="./config/certbot"
 email="pankgeorg@gmail.com" # Adding a valid address is strongly recommended
