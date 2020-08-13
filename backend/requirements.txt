@@ -16,6 +16,6 @@ pytz==2020.1
 six==1.14.0
 starlette==0.13.2
 tabula-py==2.1.0
-uvicorn==0.11.5
+uvicorn==0.11.7
 uvloop==0.14.0
 websockets==8.1
