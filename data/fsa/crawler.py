@@ -5,7 +5,7 @@ Small module to download and extract a dataframe with the
 Pharmacy Duties in Athens, Greece, through the official portal
 fsa.gr
 """
-m
+import logging
 import datetime
 from itertools import islice
 from time import sleep
@@ -17,9 +17,10 @@ import pandas
 import requests
 from requests.models import Response
 
+from settings import LOG_FILE
 from models.Pharmacy import Duty, DutyOrm, Pharmacy, PharmacyOrm
-
-print(f"Loading @{datetime.datetime.now()}")
+log = logging.getLogger(LOG_FILE)
+log.info(f"{__name__} Loading @{datetime.datetime.now()}")
 TEMPLATE = "prevcat=1&prevcat1=&dateduty=5%2F10%2F2019&areaid=0&x=30&y=10"
 TQS = {"prevcat": 1, "dateduty": "29/02/2020", "areaid": 0, "x": 30, "y": 10}
 
@@ -76,7 +77,7 @@ def parse_page(response: Response, date: DateT = None) -> Tuple[List[PharmaT], b
         a_elem = soup.find_all("table")[3].find_all("a")
         t_val = len(a_elem) == 4 or ">>" in a_elem[1].attrs["href"]
     except Exception as e:
-        print("error")
+        log.error(f"{__name__} parse_page error")
         # On error stop iteration for this date and continue
         t_val = False
 
@@ -98,7 +99,7 @@ def parse_date(date: DateT) -> List[PharmaT]:
         nr_val = requests.get(url)
         ext, cont = parse_page(nr_val, date)
         pharmas.extend(ext)
-        print("Date {}, page {}".format(date, i))
+        log.info(f"{__name__} parse_date Date {date}, page {i}")
         i += 1
         sleep(0.2)
 
@@ -125,23 +126,23 @@ def run(xlOut=False):
         ps_val = []
 
         for date in dates:
-            print(date)
+            log.info(f"{__name__} run {date}")
             ps_val.extend(parse_date(date))
         df_val = pandas.DataFrame(ps_val)
         df_val.columns = ["id", "name", "area", "time", "date"]
-        print("Getting pharmas")
+        log.info(f"{__name__} run Getting pharmas")
         pharmas = []
 
         for _id in df_val.id.drop_duplicates():
             pharmas.append(parse_pharma(_id))
-            print(_id)
+            log.info(f"{__name__}{_id}")
             sleep(0.2)
 
         if xlOut:
             pandas.DataFrame(pharmas).to_excel("pharmas.xlsx")
             df_val.to_excel("{}_fsa.xlsx".format(dates[0]).replace("/", "-"))
     else:
-        print("sorry something is wrong")
+        log.info(f"{__name__} run sorry something is wrong")
 
 
 if __name__ == "__main__":
@@ -158,7 +159,7 @@ def run_with_db(N=None):
         ids = set()
         n = N if N is not None else len(dates)
         for date in islice(dates, n):
-            print(date)
+            log.info(f"{__name__} run_with_db {date}")
             ps_val.extend(parse_date(date))
         for duty in ps_val:
             tpl = tuple_to_duty(duty)
@@ -179,7 +180,7 @@ def run_with_db(N=None):
         pharmas = []
         for _id in list(ids):
             pharmas.append(parse_pharma(_id))
-            print(_id)
+            log.info(f"{__name__} {_id})")
             sleep(0.1)
         for pharma in pharmas:
             tpl = tuple_to_pharma(pharma)
