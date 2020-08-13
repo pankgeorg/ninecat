@@ -1,4 +1,5 @@
 export const tools = "/tools";
+export const pharma = "/pharma";
 export const root = "/";
 export const inputId = "fileInputDad";
 export const dadFileUploadURL = "/daduploadfile/";
