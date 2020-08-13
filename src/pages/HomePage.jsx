@@ -46,7 +46,7 @@ const HomePage = props => {
           <a
             target="_blank"
             rel="noreferrer noopener"
-            href="pankgeorg@gmail.com"
+            href="mailto:pankgeorg@gmail.com"
           >
             mail me?
           </a>
