@@ -163,9 +163,11 @@ def run_with_db(N=None):
         for duty in ps_val:
             tpl = tuple_to_duty(duty)
             ids.add(tpl.fsa_id)
-            db_tpl = DutyOrm.session.query(DutyOrm)\
-                .filter(DutyOrm.fsa_id == tpl.fsa_id, DutyOrm.date == tpl.date)\
+            db_tpl = (
+                DutyOrm.session.query(DutyOrm)
+                .filter(DutyOrm.fsa_id == tpl.fsa_id, DutyOrm.date == tpl.date)
                 .first()
+            )
             if db_tpl:
                 for key, value in tpl.dict().items():
                     setattr(db_tpl, key, value)
@@ -181,7 +183,11 @@ def run_with_db(N=None):
             sleep(0.1)
         for pharma in pharmas:
             tpl = tuple_to_pharma(pharma)
-            db_tpl = PharmacyOrm.session.query(PharmacyOrm).filter(PharmacyOrm.fsa_id == tpl.fsa_id).first()
+            db_tpl = (
+                PharmacyOrm.session.query(PharmacyOrm)
+                .filter(PharmacyOrm.fsa_id == tpl.fsa_id)
+                .first()
+            )
             if db_tpl:
                 for key, value in tpl.dict().items():
                     setattr(db_tpl, key, value)
