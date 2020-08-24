@@ -6,6 +6,7 @@ from sqlalchemy import Column, DateTime, Integer
 from database import session
 from models import Base
 from settings import LOG_FILE
+
 log = logging.getLogger(LOG_FILE)
 
 NOW = lambda: datetime.now(timezone.utc)

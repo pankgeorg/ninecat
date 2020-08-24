@@ -1,4 +1,5 @@
 .env
+venv
 include
 lib
 lib64

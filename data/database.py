@@ -1,10 +1,9 @@
 import logging
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
 from models import Base
 from settings import DATABASE_URI, ENVIRONMENT
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 log = logging.getLogger(__name__)
 engine = create_engine(
@@ -27,4 +26,5 @@ def get_connection():
 def init_db():
     with get_connection() as con:
         con.execute("CREATE SCHEMA IF NOT EXISTS fsa;")
+        con.execute("CREATE SCHEMA IF NOT EXISTS weather;")
     Base.metadata.create_all(engine, checkfirst=True)

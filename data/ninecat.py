@@ -1,6 +1,8 @@
-from typing import Optional
 import logging
+from typing import Optional
+
 import typer
+
 from settings import LOG_FILE
 
 logging.basicConfig(
@@ -18,6 +20,15 @@ def update_fsa(N: Optional[str] = None):
 
     run_with_db(N)
     log.info("Job Finished")
+
+
+@app.command()
+def update_weather():
+    log.info("getting weather for pre-defined locations")
+    from weather.crawler import run
+
+    run()
+    log.info("weather job finished")
 
 
 @app.command()
