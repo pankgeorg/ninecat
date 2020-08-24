@@ -7,7 +7,7 @@ DELETE_TARGETS = $(VENV)
 .PHONY : clean
 
 data : fsa/updated weather/updated
-	date >> runs
+	date >> data 
 
 weather/updated:
 	$(ACTIVATE); $(PYTHON) ninecat.py update-weather; date > weather/updated
