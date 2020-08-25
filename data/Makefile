@@ -6,10 +6,14 @@ DELETE_TARGETS = $(VENV)
 
 .PHONY : clean
 
-data : fsa/updated
+data : fsa/updated weather/updated
+	date >> data 
+
+weather/updated:
+	$(ACTIVATE); $(PYTHON) ninecat.py update-weather; date > weather/updated
 
 fsa/updated:
-	$(ACTIVATE); $(PYTHON) ninecat.py update-fsa; date > fsa_updated
+	$(ACTIVATE); $(PYTHON) ninecat.py update-fsa; date > fsa/updated
 
 venv: venv/bin/activate
 
