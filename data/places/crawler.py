@@ -55,5 +55,5 @@ def create_place_detail():
             place_list.append(PlaceDetail(gmaps_id=candidate.get("place_id")))
         place.places = place_list
         place.save()
-        return place.places.length
+        return len(place.places) if place_list else 0
     return 0

@@ -9,6 +9,9 @@ DELETE_TARGETS = $(VENV)
 data : fsa/updated weather/updated
 	date >> data
 
+places/oneplace:
+	$(ACTIVATE); $(PYTHON) ninecat.py process-place; date >> places/oneplace
+
 weather/updated:
 	$(ACTIVATE); $(PYTHON) ninecat.py update-weather; date > weather/updated
 
