@@ -1,3 +1,5 @@
+import datetime
+
 import googlemaps
 
 from models.Place import PlaceDetail, PlaceSearch
@@ -16,6 +18,7 @@ def place_search_fill_data():
             location_bias=unprocessed.locationbias,
         )
         unprocessed.data = result
+        unprocessed.updated_at = datetime.datetime.now()
         unprocessed.save(commit=True)
         return 1
     else:  # No places left ungeocoded
@@ -34,6 +37,7 @@ def place_detail_fill_data():
         place.gmaps_id
     )  # Empty "Fields" means, get all data. Billing for that is big
     place.data = result
+    place.updated_at = datetime.datetime.now()
     place.save(commit=True)
 
 
@@ -54,6 +58,7 @@ def create_place_detail():
         for candidate in candidates:
             place_list.append(PlaceDetail(gmaps_id=candidate.get("place_id")))
         place.places = place_list
+        place.updated_at = datetime.datetime.now()
         place.save()
         return len(place.places) if place_list else 0
     return 0
