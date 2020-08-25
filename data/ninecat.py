@@ -3,6 +3,7 @@ import logging
 from typing import Optional
 
 import typer
+
 from settings import LOG_FILE
 
 logging.basicConfig(
@@ -29,6 +30,18 @@ def update_weather():
 
     run()
     log.info("weather job finished")
+
+
+@app.command()
+def process_place():
+    log.info("Trying to do process a place")
+    import places.crawler as pc
+
+    pc.place_search_fill_data()
+    pc.create_place_detail()
+    pc.place_detail_fill_data()
+
+    log.info("this may have suceeded, also maybe not")
 
 
 @app.command()
