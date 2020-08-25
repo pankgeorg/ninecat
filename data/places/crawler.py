@@ -48,11 +48,12 @@ def create_place_detail():
     place = (
         PlaceSearch.session.query(PlaceSearch)
         .filter(PlaceSearch.places == None)
+        .filter(PlaceSearch.data != None)
         .first()
     )
     if place is None:
         return 0
-    if place.data.get("status") == "OK":
+    if place.data and place.data.get("status") == "OK":
         place_list = []
         candidates = place.data.get("candidates", [])
         for candidate in candidates:
