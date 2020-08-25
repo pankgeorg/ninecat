@@ -1,8 +1,8 @@
+"""This is the catalog of the services provided in this module"""
 import logging
 from typing import Optional
 
 import typer
-
 from settings import LOG_FILE
 
 logging.basicConfig(

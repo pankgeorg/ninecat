@@ -1,7 +1,6 @@
+from models.BaseOrm import BaseOrm
 from pydantic import BaseModel
 from sqlalchemy import JSON, Column, Integer, String
-
-from models.BaseOrm import BaseOrm
 
 U = "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={key}"
 

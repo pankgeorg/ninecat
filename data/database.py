@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 engine = create_engine(
     DATABASE_URI, echo=(True if ENVIRONMENT != "production" else False)
 )
-SessionFactory = sessionmaker(bind=engine)
+SessionFactory = sessionmaker(bind=engine, expire_on_commit=False)
 session = SessionFactory()
 
 
@@ -27,4 +27,5 @@ def init_db():
     with get_connection() as con:
         con.execute("CREATE SCHEMA IF NOT EXISTS fsa;")
         con.execute("CREATE SCHEMA IF NOT EXISTS weather;")
+        con.execute("CREATE SCHEMA IF NOT EXISTS places;")
     Base.metadata.create_all(engine, checkfirst=True)
