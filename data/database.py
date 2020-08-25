@@ -1,13 +1,20 @@
 import logging
+from functools import partial
+from json import dumps
 
-from models import Base
-from settings import DATABASE_URI, ENVIRONMENT
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from models import Base
+from settings import DATABASE_URI, ENVIRONMENT
+
 log = logging.getLogger(__name__)
 engine = create_engine(
-    DATABASE_URI, echo=(True if ENVIRONMENT != "production" else False)
+    DATABASE_URI,
+    echo=(True if ENVIRONMENT != "production" else False),
+    json_serializer=partial(
+        dumps, ensure_ascii=False
+    ),  # https://stackoverflow.com/questions/58444110/postgresql-json-column-not-saving-utf-8-character
 )
 SessionFactory = sessionmaker(bind=engine, expire_on_commit=False)
 session = SessionFactory()
