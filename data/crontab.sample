@@ -1,0 +1,2 @@
+# m h  dom mon dow   command
+15 20  * * * cd /home/user/ninecat/data && make data
