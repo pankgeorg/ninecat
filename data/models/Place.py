@@ -16,6 +16,7 @@ class PlaceSearch(BaseOrm):
     priority = Column(Integer, default=0)
     data = Column(JSON)
     places = relationship("PlaceDetail", back_populates="search")
+    source_entity_id = Column(String)  # Use this in ETL
 
 
 class PlaceDetail(BaseOrm):

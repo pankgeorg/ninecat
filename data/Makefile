@@ -7,7 +7,7 @@ DELETE_TARGETS = $(VENV)
 .PHONY : clean
 
 data : fsa/updated weather/updated
-	date >> data 
+	date >> data
 
 weather/updated:
 	$(ACTIVATE); $(PYTHON) ninecat.py update-weather; date > weather/updated
@@ -21,6 +21,15 @@ venv/bin/activate: requirements.txt
 	test -d venv || $(PYTHON) -m venv $(VENV)
 	$(ACTIVATE); $(INSTALL)
 	touch venv/bin/activate
+
+migrations:
+	PYTHONPATH=. alembic revision --autogenerate
+
+applymigrations:
+	PYTHONPATH=. alembic upgrade head
+
+stompmigrations:
+	PYTHONPATH=. alembic stamp head
 
 clean :
 	rm -rf $(DELETE_TARGETS)
