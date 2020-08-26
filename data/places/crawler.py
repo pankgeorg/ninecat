@@ -9,10 +9,7 @@ from settings import MAPSKEY
 
 def place_search_fill_data():
     unprocessed = (
-        PlaceSearch.session.query(PlaceSearch)
-        .filter(PlaceSearch.places == None)
-        .filter(text("CAST(places.place_text_search.data->>'status' AS TEXT) = 'OK'"))
-        .first()
+        PlaceSearch.session.query(PlaceSearch).filter(PlaceSearch.data == None).first()
     )
     if unprocessed:
         gmaps = googlemaps.Client(key=MAPSKEY)
