@@ -4,7 +4,7 @@ INSTALL := pip install -Ur requirements.txt
 VENV := venv
 DELETE_TARGETS = $(VENV)
 
-.PHONY : clean places/oneplace
+.PHONY : clean places/oneplace data weather/updated fsa/updated
 
 data : fsa/updated weather/updated
 	date >> data
