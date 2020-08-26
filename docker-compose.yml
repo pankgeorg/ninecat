@@ -27,3 +27,8 @@ services:
     image: dpage/pgadmin4
     env_file:
       - pgadmin.env
+  metabase:
+    image: metabase/metabase
+    restart: unless-stopped
+    env_file:
+      - metabase.env
