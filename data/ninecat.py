@@ -36,10 +36,10 @@ def update_weather():
 def process_place():
     log.info("Trying to do process a place")
     import places.crawler as pc
-
-    pc.place_search_fill_data()
-    pc.create_place_detail()
-    pc.place_detail_fill_data()
+    for i in range(30):
+        pc.place_search_fill_data()
+        pc.create_place_detail()
+        pc.place_detail_fill_data()
 
     log.info("this may have suceeded, also maybe not")
 
