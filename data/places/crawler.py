@@ -52,7 +52,7 @@ def create_place_detail():
     place = (
         PlaceSearch.session.query(PlaceSearch)
         .filter(PlaceSearch.places == None)
-        .filter(PlaceSearch.data != None)
+        .filter(text("CAST(places.place_text_search.data->>'status' AS TEXT) = 'OK'"))
         .first()
     )
     if place is None:
@@ -61,7 +61,9 @@ def create_place_detail():
         place_list = []
         candidates = place.data.get("candidates", [])
         for candidate in candidates:
-            place_detail = PlaceDetail(gmaps_id=candidate.get("place_id"), updated_at=datetime.datetime.now())
+            place_detail = PlaceDetail(
+                gmaps_id=candidate.get("place_id"), updated_at=datetime.datetime.now()
+            )
             place_list.append(place_detail)
         place.places = place_list
         place.updated_at = datetime.datetime.now()
