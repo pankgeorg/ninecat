@@ -57,7 +57,8 @@ def create_place_detail():
         place_list = []
         candidates = place.data.get("candidates", [])
         for candidate in candidates:
-            place_list.append(PlaceDetail(gmaps_id=candidate.get("place_id")))
+            place_detail = PlaceDetail(gmaps_id=candidate.get("place_id"), updated_at=datetime.datetime.now())
+            place_list.append(place_detail)
         place.places = place_list
         place.updated_at = datetime.datetime.now()
         place.save()
