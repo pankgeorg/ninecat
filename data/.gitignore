@@ -5,4 +5,6 @@ lib
 lib64
 share
 bin
+*.csv
+*.json
 __pycache__

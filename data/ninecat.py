@@ -3,7 +3,6 @@ import logging
 from typing import Optional
 
 import typer
-
 from settings import LOG_FILE
 
 logging.basicConfig(
@@ -24,11 +23,11 @@ def update_fsa(N: Optional[str] = None):
 
 
 @app.command()
-def update_weather():
-    log.info("getting weather for pre-defined locations")
-    from weather.crawler import run
+def update_weather(cities_count: Optional[int] = 1500):
+    log.info("getting greek weather")
+    from weather.crawler import greek_cities_current_weather as run
 
-    run()
+    run(cities_count)
     log.info("weather job finished")
 
 
@@ -36,17 +35,19 @@ def update_weather():
 def process_place():
     log.info("Trying to do process a place")
     import places.crawler as pc
-    for i in range(30):
-        pc.place_search_fill_data()
-        pc.create_place_detail()
-        pc.place_detail_fill_data()
+
+    pc.place_search_fill_data()
+    pc.create_place_detail()
+    pc.place_detail_fill_data()
 
     log.info("this may have suceeded, also maybe not")
 
 
 @app.command()
-def nothing():
-    pass
+def load_csv():
+    from csvdata.load import run
+
+    run()
 
 
 if __name__ == "__main__":

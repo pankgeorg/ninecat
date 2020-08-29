@@ -6,6 +6,9 @@ DELETE_TARGETS = $(VENV)
 
 .PHONY : clean places/oneplace data weather/updated fsa/updated
 
+load_csv:
+	$(ACTIVATE); $(PYTHON) csvdata/load.py
+
 data : fsa/updated weather/updated
 	date >> data
 
