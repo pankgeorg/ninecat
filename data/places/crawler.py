@@ -105,10 +105,8 @@ def place_query_request():
         location = p.get("location").split(",")
         radius = p.get("radius")
         keyword = p.get("keyword")
-        print(location, radius, keyword)
         result = gmaps.places_nearby(location=location, radius=radius, keyword=keyword)
         page_token = result.get("next_page_token", None)
-        print(f"Returned {result.get('status')} results, pt: {page_token}")
         while page_token:
             sleep(0.5)
             next_page = try_again(
@@ -122,7 +120,6 @@ def place_query_request():
             result["results"].extend(next_page.get("results", []))
             result["html_attributions"].extend(next_page.get("html_attributions", []))
             page_token = next_page.get("page_token")
-            print(f"Returned {next_page.get('results')} results, pt: {page_token}")
 
         place_request.data = result
         place_request.updated_at = datetime.datetime.now()
