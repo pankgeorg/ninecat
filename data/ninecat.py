@@ -3,6 +3,7 @@ import logging
 from typing import Optional
 
 import typer
+
 from settings import LOG_FILE
 
 logging.basicConfig(
@@ -41,6 +42,16 @@ def process_place():
     pc.place_detail_fill_data()
 
     log.info("this may have suceeded, also maybe not")
+
+
+@app.command()
+def process_nearby():
+    import places.crawler as pc
+
+    log.info("Trying to process a request")
+
+    pc.place_query_request()
+    log.info("done?")
 
 
 @app.command()

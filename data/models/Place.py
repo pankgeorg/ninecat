@@ -14,6 +14,8 @@ class PlaceSearch(BaseOrm):
         String, default="circle:1000000@37.8945342,23.7307223"
     )  # 1.000km around Athens, Greece
     priority = Column(Integer, default=0)
+    endpoint_type = Column(String)
+    input_params = Column(JSON)
     data = Column(JSON)
     places = relationship("PlaceDetail", back_populates="search")
     source_entity_id = Column(String)  # Use this in ETL
