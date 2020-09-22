@@ -32,3 +32,8 @@ services:
     restart: unless-stopped
     env_file:
       - metabase.env
+  hasura:
+    image: hasura/graphql-engine
+    restart: unless-stopped
+    env_file:
+      - hasura.env
