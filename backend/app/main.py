@@ -8,15 +8,28 @@ import numpy as np
 import pandas
 from tabula import read_pdf
 
+from database import Reading, session
 from fastapi import FastAPI, File, UploadFile
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 app.mount("/tmp/", StaticFiles(directory="/tmp"), name="tmp")
 
+
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
+
+#  OK that's not rest/http compliant
+@app.get("/station-readings")
+def read_station_readings(t: float, g: float, p: float, h: float, s: str):
+    reading = Reading(
+        temperature=t, gas_resistance=g, humidity=h, pressure=p, weather_station=s
+    )
+    session.add(reading)
+    session.commit()
+    session.close()
 
 
 @app.get("/items/{item_id}")
