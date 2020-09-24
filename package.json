@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.2.0",
     "@blueprintjs/core": "^3.26.1",
     "@blueprintjs/icons": "^3.16.0",
     "@blueprintjs/table": "^3.8.5",
@@ -20,7 +21,7 @@
     "react-leaflet": "^2.7.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^3.4.3",
     "tachyons": "^4.11.1"
   },
   "scripts": {
@@ -47,6 +48,12 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.3",
     "graphql": "^15.0.0",
-    "prettier-eslint": "^9.0.1"
+    "prettier-eslint": "^9.0.1",
+    "prettier-stylelint": "^0.4.2",
+    "stylelint": "^13.7.1",
+    "stylelint-config-property-sort-order-smacss": "^6.3.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.1.0"
   }
 }

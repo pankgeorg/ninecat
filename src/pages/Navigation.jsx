@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Alignment, Button, Menu, Popover } from "@blueprintjs/core";
 import MenuItemLink from "../components/MenuItemLink";
 import ButtonLink from "../components/ButtonLink";
-import { root, tools } from "../constants";
+import { root, tools, weather } from "../constants";
 
 export default () => (
   <Navbar>
@@ -23,6 +23,12 @@ export default () => (
       >
         <Button className="bp3-minimal" icon="build" text="Tools" />
       </Popover>
+      <ButtonLink
+        to={weather}
+        className="bp3-minimal"
+        icon="cloud"
+        text="Weather"
+      />
     </Navbar.Group>
   </Navbar>
 );

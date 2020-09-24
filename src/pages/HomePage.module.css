@@ -1,0 +1,14 @@
+.weatherContainer {
+  padding: 0 1rem;
+}
+
+.weatherFrames {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.weatherFrames iframe {
+  margin: auto;
+}
