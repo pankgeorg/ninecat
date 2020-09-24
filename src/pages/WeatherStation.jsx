@@ -21,7 +21,7 @@ const WeatherStation = () => {
         />
         <iframe
           title="Weather status in Neo Psychiko"
-          src="http://metabase.pankgeorg.com/public/question/b4ecb030-bb7d-48db-837e-00597bfc860b"
+          src="https://metabase.pankgeorg.com/public/question/b4ecb030-bb7d-48db-837e-00597bfc860b"
           frameBorder="0"
           width="800"
           height="400"
