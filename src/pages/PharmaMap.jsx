@@ -107,7 +107,8 @@ const AreaSelect = ({ onSelect = () => {} }) => {
   );
 };
 
-const fmtDate = date => date.toISOString().slice(0, 10);
+const fmtDate = date =>
+  `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 export default () => {
   const today = useMemo(() => fmtDate(new Date()), []);
   const tomorrow = useMemo(
