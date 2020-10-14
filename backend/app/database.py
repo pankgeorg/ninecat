@@ -28,6 +28,13 @@ class Reading(Base):
     humidity = Column(Float)
     gas_resistance = Column(Float)
     weather_station = Column(String)
+    gust = Column(Float)
+    wind = Column(Float)
+    wind_count = Column(Integer)
+    wind_direction = Column(Integer)
+    water_count = Column(Integer)
+    now = Column(Float)
+    prev = Column(Float)
 
 
 Base.metadata.create_all(engine, checkfirst=True)
