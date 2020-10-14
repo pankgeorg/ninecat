@@ -23,9 +23,33 @@ def read_root():
 
 #  OK that's not rest/http compliant
 @app.get("/station-readings")
-def read_station_readings(t: float, g: float, p: float, h: float, s: str):
+def read_station_readings(
+    temp: float,
+    gasr: float,
+    pres: float,
+    humd: float,
+    s: str,
+    gust: float,
+    wind: float,
+    wndc: int,
+    degr: int,
+    watr: int,
+    now: float,
+    prev: float,
+):
     reading = Reading(
-        temperature=t, gas_resistance=g, humidity=h, pressure=p, weather_station=s
+        temperature=temp,
+        gas_resistance=gasr,
+        humidity=humd,
+        pressure=pres,
+        weather_station=s,
+        gust=gust,
+        wind=wind,
+        wind_count=wndc,
+        wind_direction=degr,
+        water_count=watr,
+        now=now,
+        prev=prev,
     )
     session.add(reading)
     session.commit()
