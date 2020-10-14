@@ -8,7 +8,7 @@ import numpy as np
 import pandas
 from tabula import read_pdf
 
-from database import Reading, session
+from app.database import Reading, session
 from fastapi import FastAPI, File, UploadFile
 from fastapi.staticfiles import StaticFiles
 
