@@ -54,6 +54,7 @@ def read_station_readings(
     session.add(reading)
     session.commit()
     session.close()
+    return "OK"
 
 
 @app.get("/items/{item_id}")
