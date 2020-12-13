@@ -1,6 +1,6 @@
 {
   "name": "ninecat",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.2.0",

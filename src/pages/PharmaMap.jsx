@@ -65,7 +65,7 @@ const PharmaSelect = ({ onSelect = () => {} }) => {
   );
 };
 
-const AreaSelect = ({ onSelect = () => {} }) => {
+const AreaSelect = ({ onSelect = () => {}, selectedValue }) => {
   const [item, setItemInternal] = useState(null);
   const setItem = useCallback(
     ({ area }) => setItemInternal(area) || onSelect(area),
@@ -102,7 +102,10 @@ const AreaSelect = ({ onSelect = () => {} }) => {
       )}
       noResults={<MenuItem disabled text="No results." />}
     >
-      <Button text={item || "Select area"} rightIcon="double-caret-vertical" />
+      <Button
+        text={item || selectedValue || "Select area"}
+        rightIcon="double-caret-vertical"
+      />
     </Select>
   );
 };
@@ -120,7 +123,7 @@ export default () => {
     []
   );
 
-  const [area, setArea] = useState(null);
+  const [area, setArea] = useState("ΑΜΠΕΛΟΚΗΠΟΙ");
   const [date, setDate] = useState(today);
   const { loading, data: { duty: data } = {} } = useQuery(
     gql`
@@ -134,6 +137,16 @@ export default () => {
           time
           date
           area
+          pharmacy {
+            address
+            name
+            area
+            tel
+            places {
+              lat
+              lng
+            }
+          }
         }
       }
     `,
@@ -141,7 +154,7 @@ export default () => {
   );
   return (
     <>
-      <AreaSelect onSelect={setArea} />
+      <AreaSelect onSelect={setArea} selectedValue={area} />
       <PharmaSelect area />
       <RadioGroup
         label=""
@@ -152,12 +165,49 @@ export default () => {
         <Radio label={`Tomorrow ${tomorrow}`} value={tomorrow} />
         <Radio label={in2Days} value={in2Days} />
       </RadioGroup>
-      {!loading &&
-        data?.map(({ id, name, date: d, area: a }) => (
-          <div key={`${id} - ${name} - ${date}`}>
-            {id} - {name} - {d} - {a}
-          </div>
-        ))}
+      <table className="bp3-html-table .modifier">
+        <thead>
+          <tr>
+            <th>ΦΑΡΜΑΚΕΙΟ</th>
+            <th>ΗΜ/ΝΙΑ</th>
+            <th>ΠΕΡΙΟΧΗ</th>
+            <th>ΩΡΑ</th>
+            <th>ΔΙΕΥΘΥΝΣΗ</th>
+          </tr>
+        </thead>
+        <tbody>
+          {!loading &&
+            data?.map(
+              ({
+                id,
+                name,
+                date: d,
+                area: a,
+                time,
+                pharmacy: { address, places: [{ lng, lat }] = [{}] } = {}
+              }) => (
+                <tr key={id}>
+                  <td>{name}</td>
+                  <td>{d}</td>
+                  <td>{a}</td>
+                  <td>{time}</td>
+                  <td>{address}</td>
+                  <td>
+                    <code>
+                      {lng}, {lat}
+                    </code>
+                  </td>
+                  <td>
+                    <img
+                      alt="Pharmacy map"
+                      src={`https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=16&markers=color:orange|"${lat},${lng}"&size=400x400&key=AIzaSyAMhdXXo_RO9fPYMOT97jMWBVTkYQ03b4s`}
+                    />
+                  </td>
+                </tr>
+              )
+            )}
+        </tbody>
+      </table>
     </>
   );
 };
