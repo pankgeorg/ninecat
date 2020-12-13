@@ -14,7 +14,7 @@ const WeatherStation = () => {
           src="https://metabase.pankgeorg.com/public/dashboard/680eb6ec-ebdf-4691-ab73-994f14d4540e?created_at=past0days~"
           frameBorder="0"
           width="100%"
-          height="400"
+          height="800"
           allowtransparency
         />
       </div>
