@@ -23,6 +23,7 @@ services:
   ninecat:
     image: ninecat-py
     restart: unless-stopped
+    env_file: backend/.env
   pgadmin4:
     image: dpage/pgadmin4
     env_file:
