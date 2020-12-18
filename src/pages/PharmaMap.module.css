@@ -2,3 +2,33 @@
   max-height: 30vh;
   overflow: auto;
 }
+
+.placeholder {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.pharmaCard {
+  width: calc(25% - 2rem);
+  margin: 1rem;
+}
+
+.pharmaCard img {
+  width: 400px;
+  height: 400px;
+}
+
+.pharmaCard h6 {
+  height: 1rem;
+  margin-top: 1rem;
+}
+
+.pharmaCard h5 {
+  height: 2rem;
+  margin-top: 1rem;
+}
+
+.pharmaCard h4 {
+  height: 4rem;
+}

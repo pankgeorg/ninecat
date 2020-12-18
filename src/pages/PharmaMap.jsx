@@ -1,6 +1,16 @@
 import React, { useState, useCallback, useMemo } from "react";
 import { Select } from "@blueprintjs/select";
-import { Button, MenuItem, Radio, RadioGroup } from "@blueprintjs/core";
+import {
+  Button,
+  Card,
+  H3,
+  H4,
+  H5,
+  H6,
+  MenuItem,
+  Radio,
+  RadioGroup
+} from "@blueprintjs/core";
 import { useQuery, gql } from "@apollo/client";
 import css from "./PharmaMap.module.css";
 
@@ -165,49 +175,34 @@ export default () => {
         <Radio label={`Tomorrow ${tomorrow}`} value={tomorrow} />
         <Radio label={in2Days} value={in2Days} />
       </RadioGroup>
-      <table className="bp3-html-table .modifier">
-        <thead>
-          <tr>
-            <th>ΦΑΡΜΑΚΕΙΟ</th>
-            <th>ΗΜ/ΝΙΑ</th>
-            <th>ΠΕΡΙΟΧΗ</th>
-            <th>ΩΡΑ</th>
-            <th>ΔΙΕΥΘΥΝΣΗ</th>
-          </tr>
-        </thead>
-        <tbody>
-          {!loading &&
-            data?.map(
-              ({
-                id,
-                name,
-                date: d,
-                area: a,
-                time,
-                pharmacy: { address, places: [{ lng, lat }] = [{}] } = {}
-              }) => (
-                <tr key={id}>
-                  <td>{name}</td>
-                  <td>{d}</td>
-                  <td>{a}</td>
-                  <td>{time}</td>
-                  <td>{address}</td>
-                  <td>
-                    <code>
-                      {lng}, {lat}
-                    </code>
-                  </td>
-                  <td>
-                    <img
-                      alt="Pharmacy map"
-                      src={`https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=16&markers=color:orange|"${lat},${lng}"&size=400x400&key=AIzaSyAMhdXXo_RO9fPYMOT97jMWBVTkYQ03b4s`}
-                    />
-                  </td>
-                </tr>
-              )
-            )}
-        </tbody>
-      </table>
+      <div className={css.placeholder}>
+        {!loading &&
+          data?.map(
+            ({
+              id,
+              name,
+              date: d,
+              area: a,
+              time,
+              pharmacy: {
+                tel,
+                address,
+                places: [{ lng, lat } = {}] = [{}]
+              } = {}
+            }) => (
+              <Card key={id} className={css.pharmaCard}>
+                <H3>{name}</H3>
+                <img
+                  alt="Pharmacy map"
+                  src={`https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=16&markers=color:orange|"${lat},${lng}"&size=400x400&key=AIzaSyAMhdXXo_RO9fPYMOT97jMWBVTkYQ03b4s`}
+                />
+                <H4>{address}</H4>
+                <H5>{time}</H5>
+                <H6>{tel}</H6>
+              </Card>
+            )
+          )}
+      </div>
     </>
   );
 };
