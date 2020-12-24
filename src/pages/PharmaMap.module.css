@@ -51,7 +51,7 @@
 [data-present="yes"] h1 {
   position: fixed;
   z-index: 12;
-  top: .5rem;
+  top: 3rem;
   left: 3rem;
 }
 
