@@ -3,6 +3,7 @@ import { Select } from "@blueprintjs/select";
 import {
   Button,
   Card,
+  H1,
   H3,
   H4,
   H5,
@@ -122,8 +123,13 @@ const AreaSelect = ({ onSelect = () => {}, selectedValue }) => {
 
 const fmtDate = date =>
   `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+
 export default () => {
-  const today = useMemo(() => fmtDate(new Date()), []);
+  const presentMode = new URLSearchParams(window.location.search).get(
+    "present"
+  );
+  console.log(presentMode);
+  const today = useMemo(() => fmtDate(new Date(+new Date() - 28800000)), []);
   const tomorrow = useMemo(
     () => fmtDate(new Date(+new Date() + 86400000)),
     []
@@ -164,44 +170,52 @@ export default () => {
   );
   return (
     <>
-      <AreaSelect onSelect={setArea} selectedValue={area} />
-      <PharmaSelect area />
-      <RadioGroup
-        label=""
-        onChange={e => setDate(e.target.value)}
-        selectedValue={date}
-      >
-        <Radio label={`Today ${today}`} value={today} />
-        <Radio label={`Tomorrow ${tomorrow}`} value={tomorrow} />
-        <Radio label={in2Days} value={in2Days} />
-      </RadioGroup>
-      <div className={css.placeholder}>
-        {!loading &&
-          data?.map(
-            ({
-              id,
-              name,
-              date: d,
-              area: a,
-              time,
-              pharmacy: {
-                tel,
-                address,
-                places: [{ lng, lat } = {}] = [{}]
-              } = {}
-            }) => (
-              <Card key={id} className={css.pharmaCard}>
-                <H3>{name}</H3>
-                <img
-                  alt="Pharmacy map"
-                  src={`https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=16&markers=color:orange|"${lat},${lng}"&size=400x400&key=AIzaSyAMhdXXo_RO9fPYMOT97jMWBVTkYQ03b4s`}
-                />
-                <H4>{address}</H4>
-                <H5>{time}</H5>
-                <H6>{tel}</H6>
-              </Card>
-            )
-          )}
+      {presentMode !== "yes" && (
+        <>
+          <AreaSelect onSelect={setArea} selectedValue={area} />
+          <PharmaSelect area />
+          <RadioGroup
+            label=""
+            onChange={e => setDate(e.target.value)}
+            selectedValue={date}
+          >
+            <Radio label={`Today ${today}`} value={today} />
+            <Radio label={`Tomorrow ${tomorrow}`} value={tomorrow} />
+            <Radio label={in2Days} value={in2Days} />
+          </RadioGroup>
+        </>
+      )}
+      <div className={css.present} data-present={presentMode}>
+        <div className={css.placeholder}>
+          <H1>Εφημερίες Φαρμακείων στους Αμπελοκήπους</H1>
+          <H4>Φαρμακείο Κολοκούρη Χρυσικοπούλου</H4>
+          {!loading &&
+            data?.map(
+              ({
+                id,
+                name,
+                date: d,
+                area: a,
+                time,
+                pharmacy: {
+                  tel,
+                  address,
+                  places: [{ lng, lat } = {}] = [{}]
+                } = {}
+              }) => (
+                <Card key={id} className={css.pharmaCard}>
+                  <H3>{name}</H3>
+                  <img
+                    alt="Pharmacy map"
+                    src={`https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=16&markers=color:orange|"${lat},${lng}"&size=400x400&key=AIzaSyAMhdXXo_RO9fPYMOT97jMWBVTkYQ03b4s`}
+                  />
+                  <H4>{address}</H4>
+                  <H5>{time}</H5>
+                  <H6>{tel}</H6>
+                </Card>
+              )
+            )}
+        </div>
       </div>
     </>
   );

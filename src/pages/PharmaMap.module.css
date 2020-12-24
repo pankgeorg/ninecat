@@ -6,17 +6,17 @@
 .placeholder {
   display: flex;
   flex-flow: row wrap;
-  width: 100%;
+  padding: 0 3rem;
 }
 
 .pharmaCard {
-  width: calc(25% - 2rem);
+  flex: 0 1 300px;
   margin: 1rem;
 }
 
 .pharmaCard img {
-  width: 400px;
-  height: 400px;
+  width: 270px;
+  height: 270px;
 }
 
 .pharmaCard h6 {
@@ -31,4 +31,33 @@
 
 .pharmaCard h4 {
   height: 4rem;
+}
+
+.pharmaCard h3 {
+  height: 3rem;
+}
+
+[data-present="yes"].present {
+  position: fixed;
+  z-index: 11;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 3rem;
+  background-color: whitesmoke;
+}
+
+[data-present="yes"] h1 {
+  position: fixed;
+  z-index: 12;
+  top: .5rem;
+  left: 3rem;
+}
+
+[data-present="yes"] > div > h4 {
+  position: fixed;
+  z-index: 12;
+  right: 3rem;
+  bottom: .5rem;
 }
