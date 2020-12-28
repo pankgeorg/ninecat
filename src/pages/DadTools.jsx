@@ -76,7 +76,7 @@ const DadTools = props => {
       <Menu>
         <CopyCellsMenuItem
           context={context}
-          getCellData={(row, col) => table[row][col]}
+          getCellData={(row, col) => table?.[row]?.[col]}
           text="Copy"
         />
       </Menu>
@@ -206,18 +206,20 @@ const DadTools = props => {
                   enableFocus="true"
                   enableFocusedCell="true"
                   defaultColumnWidth={75}
-                  getCellClipboardData={(row, col) => response.table[row][col]}
+                  getCellClipboardData={(row, col) =>
+                    response.table?.[row]?.[col]
+                  }
                   numRows={3}
                   bodyContextMenuRenderer={renderBodyContextMenu(
                     response.table || [[]]
                   )}
                 >
-                  {response.table[0].map((i, t) => (
+                  {response.table[0]?.map((i, t) => (
                     <Column
                       key={t}
                       width="2em"
                       cellRenderer={(row, col) => (
-                        <span>{response.table[row][col]}</span>
+                        <span>{response?.table?.[row]?.[col]}</span>
                       )}
                     />
                   ))}
