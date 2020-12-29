@@ -18,7 +18,8 @@ import {
   FETCH_STATES,
   inputId,
   backendURL,
-  dadFileUploadURL
+  dadFileUploadURL,
+  downloadURL
 } from "../constants";
 
 const INITIAL_TEXT = "Επιλέξτε αρχείο";
@@ -135,11 +136,11 @@ const DadTools = props => {
                     Κατεβάστε το{" "}
                     <a
                       download
-                      href={backendURL + response.pdfDownload}
+                      href={downloadURL + response.pdfDownload}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      pdf
+                      αρχείο που ανεβάσατε
                     </a>
                     <br /> ή
                   </li>
@@ -147,7 +148,7 @@ const DadTools = props => {
                     Κατεβάστε το{" "}
                     <a
                       download
-                      href={backendURL + response.excelDownload}
+                      href={downloadURL + response.excelDownload}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
