@@ -29,7 +29,7 @@ const HomePage = props => {
         <pre>
           Software Engineer, sailor
           <br />
-          Working for intelligencia.ai
+          Working at intelligencia.ai
           <br />
           in the bright city of Athens
         </pre>
@@ -52,7 +52,7 @@ const HomePage = props => {
             rel="noreferrer noopener"
             href="mailto:pankgeorg@gmail.com"
           >
-            mail me?
+            get in touch
           </a>
         </code>
       </Card>
