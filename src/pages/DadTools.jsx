@@ -10,7 +10,8 @@ import {
   Button,
   Collapse,
   Menu,
-  Toaster
+  Toaster,
+  H6
 } from "@blueprintjs/core";
 import { Column, Table, CopyCellsMenuItem } from "@blueprintjs/table";
 import styles from "./DadTools.module.css";
@@ -97,6 +98,12 @@ const DadTools = props => {
       <div className={c("flex", "flex-column", "w-75", "mw8-ns")}>
         <Card className={c("flex", "flex-column", "justify-center")}>
           <H5>Ανεβάστε το pdf</H5>
+          <H6>
+            <i>
+              if you don't know what this is you're probably on the wrong page!
+              shhh!
+            </i>{" "}
+          </H6>
           <div className={c("flex", "justify-between", "items-center")}>
             <FileInput
               className={c("w-75")}
