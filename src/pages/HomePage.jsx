@@ -43,7 +43,11 @@ const HomePage = props => {
           </div>
         </div>
         <code className="mt4 db">
+          <a href="/pkgeorgakopoulos_cv.pdf" target="_blank">
+            CV [EN] [PDF]
+          </a>
           <a
+            style={{ marginLeft: "2rem" }}
             target="_blank"
             rel="noreferrer noopener"
             href="mailto:pankgeorg@gmail.com"
