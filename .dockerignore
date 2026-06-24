@@ -1,0 +1,9 @@
+.git
+node_modules
+build
+backend
+data
+iot
+config/certbot
+**/.env
+*.md
