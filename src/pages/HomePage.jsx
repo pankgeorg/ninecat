@@ -29,7 +29,7 @@ const HomePage = props => {
         <pre>
           Software Engineer, sailor
           <br />
-          Working at intelligencia.ai
+          Working at JuliaHub
           <br />
           in the bright city of Athens
         </pre>
